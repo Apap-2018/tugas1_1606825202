@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Detail Pegawai</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+		td{
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:insert="~{header :: header}"></div>
+	<br>
+	<h3 th:text="'Lihat Data Pegawai ' + ${pegawai.nip}"></h3>
+	<table>
+		<tr>
+			<td>NIP</td>
+			<td th:text="${pegawai.nip}"></td>
+		</tr>
+		<tr>
+			<td>Nama</td>
+			<td th:text="${pegawai.nama}"></td>
+		</tr>
+		<tr>
+			<td>Tempat Lahir</td>
+			<td th:text="${pegawai.tempatLahir}"></td>
+		</tr>
+		<tr>
+			<td>Tanggal Lahir</td>
+			<td th:text="${pegawai.tanggalLahir}"></td>
+		</tr>
+		<tr>
+			<td>Tahun Masuk</td>
+			<td th:text="${pegawai.tahunMasuk}"></td>
+		</tr>
+		<tr>
+			<td>Nama Instansi</td>
+			<td th:text="${pegawai.instansi.nama}"></td>
+		</tr>
+		<tr>
+			<td>NPM</td>
+			<td th:text="${pegawai.nip}"></td>
+		</tr>
+		<tr>
+			<td>Jabatan</td>	
+			<td>
+			<th:block th:each="jabatan : ${jabatanPegawai}">
+				<p th:text="${jabatan.nama}"></p>		
+			</td>
+		</tr>
+		<tr>
+			<td>Gaji</td>
+			<td th:text="'Rp ' + ${gaji}"></td>
+		</tr>
+		
+	</table>
+	
+</body>
+
+</html>

@@ -58,20 +58,25 @@ public class PegawaiController {
 		PegawaiModel pegawai = new PegawaiModel();
 		//nip sementara
 		pegawai.setNip("1234");
+		//jabatan sementara
+		pegawai.setJabatan(null);
 		model.addAttribute("pegawai", pegawai);
-
-		List<ProvinsiModel> listProvinsi = provinsiService.getAll();
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
 		model.addAttribute("listProvinsi", listProvinsi);
 
-//		Set<String> namaJabatan = jabatanService.getNamaJabatan();
-//		model.addAttribute("jabatan", namaJabatan);
+		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
 		
-		model.addAttribute("instansi", new InstansiModel());
+		InstansiModel instansi = new InstansiModel();
+		model.addAttribute("instansi", instansi);
+		pegawai.setInstansi(instansi);
 		return "add-pegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
-	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai) {
+	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, @ModelAttribute InstansiModel instansi) {
+		System.out.println(instansi.getNama());
 		pegawaiService.add(pegawai);
 		return "success";
 	}

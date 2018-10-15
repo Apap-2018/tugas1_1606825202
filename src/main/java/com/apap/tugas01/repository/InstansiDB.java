@@ -10,4 +10,5 @@ import com.apap.tugas01.model.InstansiModel;
 
 @Repository
 public interface InstansiDB extends JpaRepository<InstansiModel, Long>{
+	InstansiModel findById(long id);
 }

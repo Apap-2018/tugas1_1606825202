@@ -6,7 +6,7 @@ import com.apap.tugas01.model.ProvinsiModel;;
 
 
 public interface ProvinsiService {
-	List<ProvinsiModel> getAll();
+	List<ProvinsiModel> getAllProvinsi();
 	
 	void addProvinsi(ProvinsiModel provinsi);
 	

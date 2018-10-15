@@ -16,7 +16,7 @@ public class ProvinsiSeviceImpl implements ProvinsiService {
 	@Autowired
 	private ProvinsiDB provinsiDB;
 	
-	public List<ProvinsiModel> getAll() {
+	public List<ProvinsiModel> getAllProvinsi() {
 		return provinsiDB.findAll();
 	}
 	

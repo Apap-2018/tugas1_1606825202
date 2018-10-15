@@ -34,7 +34,7 @@
 		
 		<div class="form-group">
 		  <label>Tahun Masuk:</label>		
-		  <select class="form-control" id="tahunMasuk"></select>  
+		  <select class="form-control" type="text" name="tahunMasuk" id="tahunMasuk"></select>  
 		</div>
 		
 		<div class="form-group">
@@ -50,10 +50,11 @@
 		<div class="form-group">
 		  <label>Instansi:</label>
 		  <select class="form-control"
-		  		  th:value="${instansi}"
 		  		  name="instansi"
-		  		  id="instansi" required="required">
-			<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>		  		  
+		  		  id="instansi"
+		  		  th:value="${instansi}"
+		  		  required="required">
+		  	<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>		  
 		  </select>
 		</div>
 		
@@ -61,9 +62,11 @@
 		<div>
 		<label for="jabatan">Jabatan</label>
 		  <select multiple class="form-control">
-		  	<th:block th:each="jabatan: ${jabatan}">
-		    <option th:value="${jabatan}" th:text="${jabatan}"></option>
+		    <option th:each="jabatan: ${listJabatan}"
+		    		th:value="${jabatan}" 
+		    		th:text="${jabatan.nama}"></option>
 		  </select>
+		  <p style="font-size:10px;color:grey;">dapat memilih beberapa jabatan</p>
 		</div>
 		-->
 		 
@@ -73,7 +76,7 @@
 	
 	<script>
 		$('#provinsi').change(
-	        function() {
+			function() {
 	            $.getJSON("http://localhost:8080/provinsi/instansi", {
 	                provinsiId : $(this).val(),
 	                ajax : 'true'
@@ -81,13 +84,25 @@
 	                var html = '<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>';
 	                var len = data.length;
 	                for ( var i = 0; i < len; i++) {
-	                    html += '<option th:value=${instansi.id} th:text="' + data[i].nama + '">'
-	                            + data[i].nama + '</option>';
+	                    html += 
+	                    	'<option value= "'+ data[i].id +'" + th:text="'+ data[i].nama +'">' + data[i].nama + '</option>';
+                    		//'<option th:value=${instansi.id} th:text="' + data[i] + '">' + data[i].nama + '</option>';
+	                    	//'<option '+ th:value=data[i] + '>' + data[i].nama + '</option>';
 	                }
-	                html += '</option>';
 	                $('#instansi').html(html);
 	            });
 	        });
+		
+		$('#instansi').change(
+			function(){
+				$.getJSON("http://localhost:8080/get/instansi", {
+	                instansiId : $(this).val(),
+	                ajax : 'true'
+	            },
+	            function(data) {
+	                this.value = data;
+	            });
+			});
 		
 		for(var i=1945; i<=2018; i++){
 		    var select = document.getElementById("tahunMasuk");
@@ -96,6 +111,7 @@
 		    option.text = i;
 		    option.value = i;
 		}
+		
 	</script>
 	
 </body>

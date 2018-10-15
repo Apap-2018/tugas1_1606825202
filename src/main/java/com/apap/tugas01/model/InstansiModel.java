@@ -1,7 +1,7 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,7 +27,7 @@ public class InstansiModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private BigInteger id;
+	private long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -39,9 +39,11 @@ public class InstansiModel implements Serializable {
 	@Column(name = "deskripsi", nullable = false)
 	private String deskripsi;
 	
+	// hubungan instansi dg pegawai
 	@OneToMany(mappedBy = "instansi", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<PegawaiModel> pegawaiInstansi;
 	
+	// hub instansi dg provinsi
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_provinsi", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -56,11 +58,11 @@ public class InstansiModel implements Serializable {
 		this.provinsi = provinsi;
 	}
 
-	public BigInteger getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

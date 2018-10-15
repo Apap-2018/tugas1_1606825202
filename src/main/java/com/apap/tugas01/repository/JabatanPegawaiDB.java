@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apap.tugas01.model.JabatanPegawaiModel;
 
 @Repository
-public interface JabatanPegawaiDB extends JpaRepository<JabatanPegawaiModel, BigInteger>{
+public interface JabatanPegawaiDB extends JpaRepository<JabatanPegawaiModel, Long>{
 
 }

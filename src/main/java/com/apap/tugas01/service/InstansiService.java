@@ -1,5 +1,7 @@
 package com.apap.tugas01.service;
 
-public interface InstansiService {
+import java.util.Set;
 
+public interface InstansiService {
+	Set<String> getNamaInstansi();
 }

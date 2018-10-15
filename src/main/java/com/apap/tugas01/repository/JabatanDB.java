@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.apap.tugas01.model.JabatanModel;
 
 @Repository
-public interface JabatanDB extends JpaRepository<JabatanModel, BigInteger>{
+public interface JabatanDB extends JpaRepository<JabatanModel, Long>{
 
 }

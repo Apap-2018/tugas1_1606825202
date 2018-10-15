@@ -7,7 +7,7 @@ import com.apap.tugas01.repository.JabatanPegawaiDB;
 
 @Service
 @Transactional
-public class JabatanPegawaiSeviceImpl {
+public class JabatanPegawaiSeviceImpl implements JabatanPegawaiService{
 	@Autowired
 	JabatanPegawaiDB jabatanPegawaiDB;
 	

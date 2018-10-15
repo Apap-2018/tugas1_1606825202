@@ -22,7 +22,7 @@ public class ProvinsiModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private BigInteger id;
+	private long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -33,14 +33,15 @@ public class ProvinsiModel implements Serializable{
 	@Column(name = "presentase_tunjangan", nullable = false)
 	private double presentaseTunjangan;
 	
+	// hub provinsi dg instansi
 	@OneToMany(mappedBy = "provinsi", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<InstansiModel> instansiProvinsi;
 
-	public BigInteger getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -67,5 +68,4 @@ public class ProvinsiModel implements Serializable{
 	public void setInstansiProvinsi(List<InstansiModel> instansiProvinsi) {
 		this.instansiProvinsi = instansiProvinsi;
 	}
-	
 }

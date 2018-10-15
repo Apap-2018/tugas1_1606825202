@@ -1,6 +1,7 @@
 package com.apap.tugas01.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.apap.tugas01.model.PegawaiModel;
@@ -17,4 +18,10 @@ public class PegawaiSeviceImpl implements PegawaiService{
 		// TODO Auto-generated method stub
 		return pegawaiDB.findByNip(NIP);
 	}
+
+	@Override
+	public void add(PegawaiModel pegawai) {
+		// TODO Auto-generated method stub
+		pegawaiDB.save(pegawai);
+	}	
 }

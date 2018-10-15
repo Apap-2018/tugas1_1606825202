@@ -1,7 +1,6 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +22,7 @@ public class JabatanModel implements Serializable, Comparable<JabatanModel> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private BigInteger id;
+	private long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -39,20 +38,21 @@ public class JabatanModel implements Serializable, Comparable<JabatanModel> {
 	@Column(name = "gaji_pokok", nullable = false)
 	private Double gajiPokok;
 
+	//hub jabatan dengan pegawai
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
             },
-            mappedBy = "jabatan")
-    private List<PegawaiModel> post;
+            mappedBy = "jabatanList")
+    private List<PegawaiModel> pegawai;
 	
 	
-	public BigInteger getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

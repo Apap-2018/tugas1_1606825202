@@ -1,8 +1,6 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
-
-import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +30,7 @@ public class PegawaiModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private BigInteger id;
+	private long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -58,34 +56,35 @@ public class PegawaiModel implements Serializable{
 	@Column(name = "tahun_masuk", nullable = false)
 	private String tahunMasuk;
 	
+	//hub pegawai dg instansi
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_instansi", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private InstansiModel instansi;
 	
+	//hub pegawai dg jabatan
 	@ManyToMany(fetch = FetchType.LAZY,
 				cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "jabatan_pegawai",
 			   joinColumns = {@JoinColumn(name = "id_pegawai")},
 			   inverseJoinColumns = {@JoinColumn(name = "id_jabatan")})
-	private List<JabatanModel> jabatan;
-	
+	private List<JabatanModel> jabatanList;
 	
 	public List<JabatanModel> getJabatan() {
-		Collections.sort(jabatan);
-		return jabatan;
+		Collections.sort(jabatanList);
+		return jabatanList;
 	}
 	
 	public void setJabatan(List<JabatanModel> jabatan) {
-		this.jabatan = jabatan;
+		this.jabatanList = jabatan;
 	}
 
-	public BigInteger getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

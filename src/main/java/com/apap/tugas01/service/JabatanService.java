@@ -1,5 +1,7 @@
 package com.apap.tugas01.service;
 
-public interface JabatanService {
+import java.util.Set;
 
+public interface JabatanService {
+	Set<String> getNamaJabatan();
 }

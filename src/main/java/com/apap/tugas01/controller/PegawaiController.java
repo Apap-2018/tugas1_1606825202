@@ -1,6 +1,11 @@
 package com.apap.tugas01.controller;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,17 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.apap.tugas01.model.InstansiModel;
 import com.apap.tugas01.model.JabatanModel;
 //import com.apap.tugas01.model.JabatanPegawaiModel;
 import com.apap.tugas01.model.PegawaiModel;
+import com.apap.tugas01.model.ProvinsiModel;
+import com.apap.tugas01.service.InstansiService;
+import com.apap.tugas01.service.JabatanService;
 //import com.apap.tugas01.service.JabatanPegawaiService;
 import com.apap.tugas01.service.PegawaiService;
+import com.apap.tugas01.service.ProvinsiService;
 
 @Controller
 public class PegawaiController {
 	@Autowired
 	private PegawaiService pegawaiService;
-//	private JabatanPegawaiService jabatanPegawaiService;
+	@Autowired
+	private ProvinsiService provinsiService;
+	@Autowired
+	private InstansiService instansiService;
+	@Autowired
+	private JabatanService jabatanService;
 	
 	@RequestMapping("/")
 	private String home() {
@@ -40,13 +55,24 @@ public class PegawaiController {
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
 	private String addPegawai(Model model) {
-		model.addAttribute("pegawai", new PegawaiModel());
+		PegawaiModel pegawai = new PegawaiModel();
+		//nip sementara
+		pegawai.setNip("1234");
+		model.addAttribute("pegawai", pegawai);
+
+		List<ProvinsiModel> listProvinsi = provinsiService.getAll();
+		model.addAttribute("listProvinsi", listProvinsi);
+
+//		Set<String> namaJabatan = jabatanService.getNamaJabatan();
+//		model.addAttribute("jabatan", namaJabatan);
+		
+		model.addAttribute("instansi", new InstansiModel());
 		return "add-pegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
 	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai) {
+		pegawaiService.add(pegawai);
 		return "success";
 	}
-
 }

@@ -72,7 +72,7 @@ public class PegawaiModel implements Serializable{
 	private List<JabatanModel> jabatanList;
 	
 	public List<JabatanModel> getJabatan() {
-		Collections.sort(jabatanList);
+		//Collections.sort(jabatanList);
 		return jabatanList;
 	}
 	

@@ -36,9 +36,6 @@ public class ProvinsiController {
 	@RequestMapping(value = "/provinsi/instansi", method = RequestMethod.GET)
 	public @ResponseBody List<InstansiModel> findAllInstansi(@RequestParam(value = "provinsiId", required = true) long provinsiId) {
 	    ProvinsiModel provinsi = provinsiService.getProvinsiById(provinsiId);
-	    for (InstansiModel instansi:provinsi.getInstansiProvinsi()) {
-	    	System.out.println(instansi.getNama());
-	    }
 	    return provinsi.getInstansiProvinsi(); 
 	}
 	

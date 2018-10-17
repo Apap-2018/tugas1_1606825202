@@ -1,6 +1,8 @@
 package com.apap.tugas01.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -55,28 +57,56 @@ public class PegawaiController {
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
 	private String addPegawai(Model model) {
-		PegawaiModel pegawai = new PegawaiModel();
-		//nip sementara
-		pegawai.setNip("1234");
-		//jabatan sementara
-		pegawai.setJabatan(null);
+		PegawaiModel pegawai = new PegawaiModel(); 
 		model.addAttribute("pegawai", pegawai);
 		
 		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
 		model.addAttribute("listProvinsi", listProvinsi);
 
+		InstansiModel instansi = new InstansiModel();
+		model.addAttribute("instansi", instansi);
+		
 		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
 		model.addAttribute("listJabatan", listJabatan);
 		
-		InstansiModel instansi = new InstansiModel();
-		model.addAttribute("instansi", instansi);
-		pegawai.setInstansi(instansi);
 		return "add-pegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
-	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, @ModelAttribute InstansiModel instansi) {
-		System.out.println(instansi.getNama());
+	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai) {
+		//4 digit kode instansi
+		long kodeInstansi = pegawai.getInstansi().getId();
+		System.out.println();
+		
+		//tanggal lahir 
+		Date tanggalLahir = pegawai.getTanggalLahir();
+		String pattern = "dd-MM-yy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String date = simpleDateFormat.format(tanggalLahir);
+		date = date.replace("-", "");
+		System.out.println(date);
+		
+		//tahun masuk
+		String tahunMasuk = pegawai.getTahunMasuk();
+		System.out.println(tahunMasuk);
+		
+		//nomor urutan pegawai
+		String nomorUrutan = pegawaiService.getUrutanPegawai(pegawai);
+		System.out.println(nomorUrutan);
+		
+		String nip = kodeInstansi + date + tahunMasuk + nomorUrutan;
+		pegawai.setNip(nip);
+		System.out.println(nip);
+		
+		System.out.println(pegawai.getId()
+						   + "\n" + pegawai.getNama() 
+						   + "\n" + pegawai.getNip()
+						   + "\n" + pegawai.getTanggalLahir()
+						   + "\n" + pegawai.getTempatLahir()
+						   + "\n" + pegawai.getTahunMasuk()
+						   + "\n" + pegawai.getInstansi()
+						   + "\n" + pegawai.getJabatan());
+		
 		pegawaiService.add(pegawai);
 		return "success";
 	}

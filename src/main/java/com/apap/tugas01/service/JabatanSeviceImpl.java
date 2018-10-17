@@ -20,5 +20,18 @@ public class JabatanSeviceImpl implements JabatanService{
 		// TODO Auto-generated method stub
 		return jabatanDB.findAll();
 	}
+
+	@Override
+	public List<JabatanModel> getListJabatanById(List<String> listOfJabatanId) {
+		// TODO Auto-generated method stub
+		List<JabatanModel> listJabatan = null;
+		
+		for (String id:listOfJabatanId) {
+			long ID = Long.parseLong(id);
+			listJabatan.add(jabatanDB.findById(ID));
+		}
+		
+		return listJabatan;
+	}
 	
 }

@@ -57,18 +57,16 @@
 		  	<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>		  
 		  </select>
 		</div>
-		
-		<!-- 
-		<div>
-		<label for="jabatan">Jabatan</label>
-		  <select multiple class="form-control">
+		 
+		<div class="form-group">
+		<label>Jabatan</label>
+		  <select multiple class="form-control" name="jabatan" id="jabatan">
 		    <option th:each="jabatan: ${listJabatan}"
-		    		th:value="${jabatan}" 
+		    		th:value="${jabatan.id}" 
 		    		th:text="${jabatan.nama}"></option>
 		  </select>
 		  <p style="font-size:10px;color:grey;">dapat memilih beberapa jabatan</p>
 		</div>
-		-->
 		 
 		<button type="submit">Submit</button>	 
 	
@@ -86,8 +84,6 @@
 	                for ( var i = 0; i < len; i++) {
 	                    html += 
 	                    	'<option value= "'+ data[i].id +'" + th:text="'+ data[i].nama +'">' + data[i].nama + '</option>';
-                    		//'<option th:value=${instansi.id} th:text="' + data[i] + '">' + data[i].nama + '</option>';
-	                    	//'<option '+ th:value=data[i] + '>' + data[i].nama + '</option>';
 	                }
 	                $('#instansi').html(html);
 	            });
@@ -104,6 +100,17 @@
 	            });
 			});
 		
+		$('#jabatan').change(
+			function(){
+				$.getJSON("http://localhost:8080/get/list-jabatan", {
+	                listOfJabatanId : $(this).val(),
+	                ajax : 'true'
+	            },
+	            function(data) {
+	                this.value = data;
+	            });
+			});
+		
 		for(var i=1945; i<=2018; i++){
 		    var select = document.getElementById("tahunMasuk");
 		    var option = document.createElement("OPTION");
@@ -111,6 +118,8 @@
 		    option.text = i;
 		    option.value = i;
 		}
+		
+		
 		
 	</script>
 	

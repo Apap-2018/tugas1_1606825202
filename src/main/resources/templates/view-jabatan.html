@@ -40,16 +40,12 @@
 		</form>
 		
 		<button th:case="'forbidden'" type="submit" disabled>Hapus</button>
-		
 	</div>
 	
-
-<!-- 	
-	<form th:action="@{/pegawai/ubah}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
-		<input type="hidden" name="nip" th:value="${pegawai.nip}" />		
+	<form th:action="@{/jabatan/ubah}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
+		<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
 		<button type="submit">Ubah</button>
 	</form>
- -->
  
 </body>
 

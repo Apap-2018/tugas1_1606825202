@@ -11,7 +11,7 @@
 <body>
 	<div th:insert="~{header :: header}"></div>
 	<h2>Tambah Pegawai</h2>
-	
+		
 	<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
 		<div class="form-group">
 		  <label>Nama:</label>
@@ -33,8 +33,10 @@
 		</div>
 		
 		<div class="form-group">
-		  <label>Tahun Masuk:</label>		
-		  <select class="form-control" type="text" name="tahunMasuk" id="tahunMasuk"></select>  
+		  <label>Tahun Masuk:</label>	
+		  	<select class="form-control" th:field="*{tahunMasuk}">
+			    <option th:each="i : ${#numbers.sequence(1945, 2018)}" th:value="${i}" th:text="${i}"></option>
+			</select>	
 		</div>
 		
 		<div class="form-group">
@@ -71,7 +73,7 @@
 		<button type="submit">Submit</button>	 
 	
 	</form>
-	
+			
 	<script>
 		$('#provinsi').change(
 			function() {
@@ -110,16 +112,6 @@
 	                this.value = data;
 	            });
 			});
-		
-		for(var i=1945; i<=2018; i++){
-		    var select = document.getElementById("tahunMasuk");
-		    var option = document.createElement("OPTION");
-		    select.options.add(option);
-		    option.text = i;
-		    option.value = i;
-		}
-		
-		
 		
 	</script>
 	

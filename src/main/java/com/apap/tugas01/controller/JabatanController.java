@@ -74,16 +74,23 @@ public class JabatanController {
 	@RequestMapping(value = "jabatan/ubah", method = RequestMethod.GET)
 	public String updateJabatan(@RequestParam(value = "idJabatan") long idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
-		System.out.println(idJabatan);
 		model.addAttribute("jabatan", jabatan);
 		return "update-jabatan";
 	}
 	
 	@RequestMapping(value = "jabatan/ubah", method = RequestMethod.POST)
 	public String updateJabatanSubmit(@ModelAttribute JabatanModel jabatan){
-		System.out.println(jabatan.getId());
 		jabatanService.add(jabatan);
 		return "success";
 	}
 	
+	/**
+	 * Fitur 9: Menampilkan Daftar Jabatan
+	 * 
+	 */
+	@RequestMapping(value = "jabatan/viewall")
+	public String viewAll(Model model) {
+		model.addAttribute("listJabatan", jabatanService.getAllJabatan());
+		return "view-all-jabatan";
+	}
 }

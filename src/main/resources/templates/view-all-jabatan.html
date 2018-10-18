@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+	<head>
+		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	</head>
+	
+	<body>
+		<table id="jabatan" class="display">
+		    <thead>
+		        <tr>
+		            <th>Nama</th>
+		            <th>Deskripsi</th>
+	           	  	<th>Gaji Pokok</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each = "jabatan: ${listJabatan}">
+		            <td th:text="${jabatan.nama}"></td>
+          		    <td th:text="${jabatan.deskripsi}"></td>
+         		    <td th:text="${jabatan.gajiPokok}"></td>    
+		        </tr>
+		    </tbody>
+		</table>
+		
+		<script>
+			$(document).ready( function () {
+			    $('#jabatan').DataTable();
+			} );	
+		</script>
+
+	</body>
+</html>

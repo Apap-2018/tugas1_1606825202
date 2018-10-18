@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Detail Jabatan</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+		td{
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:insert="~{header :: header}"></div>
+	<br>
+	<h3 th:text="'Detail Jabatan ' + ${jabatan.nama}"></h3>
+	<table>
+		<tr>
+			<td>Nama</td>
+			<td th:text="${jabatan.nama}"></td>
+		</tr>
+		<tr>
+			<td>Deskripsi</td>
+			<td th:text="${jabatan.deskripsi}"></td>
+		</tr>
+		<tr>
+			<td>Gaji Pokok</td>
+			<td th:text="'Rp ' + ${jabatan.gajiPokok}"></td>
+		</tr>
+		
+	</table>
+		
+
+	
+</body>
+
+</html>

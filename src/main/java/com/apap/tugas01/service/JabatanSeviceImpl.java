@@ -39,5 +39,11 @@ public class JabatanSeviceImpl implements JabatanService{
 		// TODO Auto-generated method stub
 		jabatanDB.save(jabatan);
 	}
+
+	@Override
+	public JabatanModel getJabatanById(long id) {
+		// TODO Auto-generated method stub
+		return jabatanDB.findById(id);
+	}
 	
 }

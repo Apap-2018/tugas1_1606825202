@@ -40,4 +40,15 @@ public class JabatanController {
 		jabatanService.add(jabatan);
 		return "success";
 	}
+	
+	/**
+	 * Fitur 6: Menampilkan Data Suatu Jabatan
+	 */
+	@RequestMapping(value = "/jabatan/view")
+	public String viewJabatan(@RequestParam (value = "idJabatan") long idJabatan, Model model) {
+		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
+		model.addAttribute("jabatan", jabatan);
+		return "view-jabatan";
+	}
+	
 }

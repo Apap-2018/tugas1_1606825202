@@ -33,5 +33,11 @@ public class JabatanSeviceImpl implements JabatanService{
 		
 		return listJabatan;
 	}
+
+	@Override
+	public void add(JabatanModel jabatan) {
+		// TODO Auto-generated method stub
+		jabatanDB.save(jabatan);
+	}
 	
 }

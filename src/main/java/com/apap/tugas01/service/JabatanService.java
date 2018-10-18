@@ -8,4 +8,5 @@ public interface JabatanService {
 	List<JabatanModel> getAllJabatan();
 	List<JabatanModel> getListJabatanById(List<String> listOfJabatanId);
 	void add(JabatanModel jabatan);
+	void delete(JabatanModel jabatan);
 }

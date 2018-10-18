@@ -47,8 +47,24 @@ public class JabatanController {
 	@RequestMapping(value = "/jabatan/view")
 	public String viewJabatan(@RequestParam (value = "idJabatan") long idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
+		String deleteStatus;
+		if (jabatan.getPegawai().size() == 0) {
+			deleteStatus = "allowed";
+		}
+		else {
+			deleteStatus = "forbidden";
+		}
+		model.addAttribute("deleteStatus", deleteStatus);
 		model.addAttribute("jabatan", jabatan);
 		return "view-jabatan";
 	}
 	
+	/**
+	 * Fitur 8: Menghapus Jabatan
+	 */
+	@RequestMapping(value = "/jabatan/hapus")
+	public String deleteJabatan(@RequestParam(value = "idJabatan") long idJabatan) {
+		jabatanService.delete(jabatanService.getJabatanById(idJabatan));
+		return "success";
+	}
 }

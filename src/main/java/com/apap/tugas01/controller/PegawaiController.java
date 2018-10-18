@@ -39,10 +39,15 @@ public class PegawaiController {
 	private JabatanService jabatanService;
 	
 	@RequestMapping("/")
-	private String home() {
+	private String home(Model model) {
+		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
 		return "home";
 	}
 	
+	/**
+	 * Fitur 1: Menampilkan Data Pegawai Berdasarkan NIP
+	 */
 	@RequestMapping("/pegawai")
 	private String viewPegawaiByNIP(@RequestParam(value = "nip") String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
@@ -54,6 +59,10 @@ public class PegawaiController {
 		model.addAttribute("gaji", gaji);
 		return "view-pegawai";
 	}
+	
+	/**
+	 * Fitur 2: Menambahkan Data Pegawai di Suatu Instansi
+	 */
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
 	private String addPegawai(Model model) {
@@ -110,4 +119,22 @@ public class PegawaiController {
 		pegawaiService.add(pegawai);
 		return "success";
 	}
+	
+	/**
+	 * Fitur 3: Mengubah Data Pegawai
+	 */
+	@RequestMapping("/pegawai/ubah")
+	private String updatePegawai(@RequestParam(value = "nip") String nip, Model model) {
+		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
+		model.addAttribute("pegawai", pegawai);
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		model.addAttribute("listProvinsi", listProvinsi);
+		
+		return "update-pegawai";
+	}
+	
+//	private String updatePegawaiSubmit() {
+//		
+//	}
 }

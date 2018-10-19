@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "pegawai")
-public class PegawaiModel implements Serializable{
+public class PegawaiModel implements Serializable, Comparable<PegawaiModel>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -72,7 +72,7 @@ public class PegawaiModel implements Serializable{
 	private List<JabatanModel> jabatanList;
 	
 	public List<JabatanModel> getJabatan() {
-		//Collections.sort(jabatanList);
+		Collections.sort(jabatanList);
 		return jabatanList;
 	}
 	
@@ -135,5 +135,11 @@ public class PegawaiModel implements Serializable{
 	public void setInstansi(InstansiModel instansi) {
 		this.instansi = instansi;
 	}
-	
+
+	@Override
+	public int compareTo(PegawaiModel arg0) {
+		// TODO Auto-generated method stub
+		int compare = (int) (arg0.getTanggalLahir().getTime() - this.getTanggalLahir().getTime());
+		return compare;
+	}	
 }

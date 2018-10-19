@@ -1,7 +1,6 @@
 package com.apap.tugas01.service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +15,16 @@ public class InstansiSeviceImpl implements InstansiService{
 	@Autowired
 	private InstansiDB instansiDB;
 	
-	/**
-	 * Fungsi untuk mengembalikan Set yang berisi nama2 instansi (tanpa duplikat)
-	 */
-	public Set<String> getNamaInstansi(){
-		Set<String> namaInstansi = new HashSet<String>();
-		for (InstansiModel instansi : instansiDB.findAll()) {
-			namaInstansi.add(instansi.getNama());
-		}
-		return namaInstansi;
-	}
-
 	@Override
 	public InstansiModel getInstansi(long id) {
 		// TODO Auto-generated method stub
 		return instansiDB.findById(id);
+	}
+
+	@Override
+	public List<InstansiModel> getAllInstansi() {
+		// TODO Auto-generated method stub
+		return instansiDB.findAll();
 	}
 	
 	

@@ -42,6 +42,9 @@ public class PegawaiController {
 	private String home(Model model) {
 		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
 		model.addAttribute("listJabatan", listJabatan);
+		
+		List<InstansiModel> listInstansi = instansiService.getAllInstansi();
+		model.addAttribute("listInstansi", listInstansi);
 		return "home";
 	}
 	
@@ -137,4 +140,44 @@ public class PegawaiController {
 //	private String updatePegawaiSubmit() {
 //		
 //	}
+	
+	/**
+	 * Fitur 5: Menampilkan Data Pegawai Berdasarkan Instansi, Provinsi, dan/atau Jabatan Tertentu
+	 */
+//	@RequestMapping(value = "/pegawai/cari")
+//	private String viewPegawai(Model model) {
+//		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+//		model.addAttribute("listProvinsi", listProvinsi);
+//		
+//		return "search-pegawai";
+//	}
+//	
+//	@RequestMapping(value = "/pegawai/cari", method = RequestMethod.POST)
+//	private String viewPegawaiSubmit(@RequestParam(value = "idProvinsi") long idProvinsi,
+//							   		 @RequestParam(value = "idInstansi") long idInstansi,
+//							   		 @RequestParam(value = "idJabatan") long idJabatan) {
+//		
+//		
+//		return "search-pegawai";
+//	}
+	
+	
+	/**
+	 * Fitur 10: Menampilkan Pegawai Termuda dan Tertua di Setiap Instansi
+	 */
+	@RequestMapping(value = "/pegawai/termuda-tertua")
+	private String viewPegawaiTertuaTermuda(@RequestParam(value = "idInstansi") long idInstansi, Model model) {
+		InstansiModel instansi = instansiService.getInstansi(idInstansi);
+		
+		PegawaiModel pegawaiTertua = instansi.getPegawaiInstansi().get(0);
+		PegawaiModel pegawaiTermuda = instansi.getPegawaiInstansi().get(instansi.getPegawaiInstansi().size()-1);
+
+		model.addAttribute("pegawaiTertua", pegawaiTertua);
+		model.addAttribute("pegawaiTermuda", pegawaiTermuda);
+		model.addAttribute("jabatanPegawaiTertua", instansi.getNama());
+		model.addAttribute("jabatanPegawaiTermuda", instansi.getNama());
+
+		return "view-pegawai-tertua-termuda";
+	}
+
 }

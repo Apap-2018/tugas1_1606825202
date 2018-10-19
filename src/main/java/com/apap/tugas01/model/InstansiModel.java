@@ -1,7 +1,8 @@
 package com.apap.tugas01.model;
 
 import java.io.Serializable;
-
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -83,6 +84,7 @@ public class InstansiModel implements Serializable {
 	}
 
 	public List<PegawaiModel> getPegawaiInstansi() {
+		Collections.sort(pegawaiInstansi);
 		return pegawaiInstansi;
 	}
 

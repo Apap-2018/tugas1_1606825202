@@ -44,17 +44,11 @@
 			</tr>
 			<tr>
 				<td>Jabatan</td>	
-				<td>
-				<th:block th:each="jabatan : ${jabatanPegawaiTermuda}">
-					<p th:text="${jabatan.nama}"></p>		
-				</td>
-			</tr>
-			<tr>
-				<td>Gaji</td>
-				<td th:text="'Rp ' + ${gajiPegawaiTermuda}"></td>
+				<td th:text="${jabatanPegawaiTermuda}"></td>
 			</tr>
 		</table>
-		
+
+ 		
 		<h3>Data Pegawai Tertua</h3>
 		<table>
 			<tr>
@@ -83,16 +77,9 @@
 			</tr>
 			<tr>
 				<td>Jabatan</td>	
-				<td>
-				<th:block th:each="jabatan : ${jabatanPegawaiTertua}">
-					<p th:text="${jabatan.nama}"></p>		
-				</td>
-			</tr>
-			<tr>
-				<td>Gaji</td>
-				<td th:text="'Rp ' + ${gajiPegawaiTertua}"></td>
+				<td th:text="${jabatanPegawaiTertua}"></td>
 			</tr>
 		</table>
-
+ 
 	</body>
 </html>

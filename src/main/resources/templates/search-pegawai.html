@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	
 
 		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -13,7 +13,7 @@
 	</head>
 	
 	<body>
-		<div th:insert="~{header :: header}"></div>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
 	
 		<h3>Cari Pegawai</h3>
 		

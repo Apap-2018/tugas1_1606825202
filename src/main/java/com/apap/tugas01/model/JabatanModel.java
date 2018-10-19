@@ -44,14 +44,11 @@ public class JabatanModel implements Serializable, Comparable<JabatanModel> {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
             },
-            mappedBy = "jabatanList")
+            mappedBy = "listJabatan")
     private List<PegawaiModel> pegawai;
-    
-    private int jumlahPegawai;
-    
+        
     public int countPegawai() {
-    	jumlahPegawai = pegawai.size();
-    	return jumlahPegawai;
+    	return pegawai.size();
     }
 
 	public long getId() {

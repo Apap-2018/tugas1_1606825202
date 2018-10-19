@@ -48,7 +48,7 @@ public class JabatanController {
 	public String viewJabatan(@RequestParam (value = "idJabatan") long idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
 		String deleteStatus;
-		if (jabatan.getPegawai().size() == 0) {
+		if (jabatan.countPegawai() == 0) {
 			deleteStatus = "allowed";
 		}
 		else {

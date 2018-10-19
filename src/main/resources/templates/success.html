@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Insert title here</title>
-</head>
+	<head>
+		<title>Insert title here</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	</head>
 
-<body>
-
-</body>
+	<body>
+			<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	</body>
 </html>

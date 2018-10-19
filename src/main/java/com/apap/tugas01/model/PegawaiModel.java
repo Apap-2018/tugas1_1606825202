@@ -69,15 +69,15 @@ public class PegawaiModel implements Serializable, Comparable<PegawaiModel>{
 	@JoinTable(name = "jabatan_pegawai",
 			   joinColumns = {@JoinColumn(name = "id_pegawai")},
 			   inverseJoinColumns = {@JoinColumn(name = "id_jabatan")})
-	private List<JabatanModel> jabatanList;
+	private List<JabatanModel> listJabatan;
 	
 	public List<JabatanModel> getJabatan() {
-		Collections.sort(jabatanList);
-		return jabatanList;
+		Collections.sort(listJabatan);
+		return listJabatan;
 	}
 	
 	public void setJabatan(List<JabatanModel> jabatan) {
-		this.jabatanList = jabatan;
+		this.listJabatan = jabatan;
 	}
 
 	public long getId() {

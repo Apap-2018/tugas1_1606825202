@@ -3,7 +3,7 @@
 
 	<head>
 		<title>Detail Pegawai</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 		<style>
 			td{
 		    border: 1px solid #dddddd;
@@ -14,7 +14,7 @@
 	</head>
 	
 	<body>
-		<div th:insert="~{header :: header}"></div>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
 		<h3>Data Pegawai Termuda </h3>
 		<table>

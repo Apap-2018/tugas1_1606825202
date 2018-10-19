@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org">
 	<head>
+		<title>Viewall Jabatan</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		
 		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
 		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 	</head>
 	
 	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
 		<table id="jabatan" class="display">
 		    <thead>
 		        <tr>
@@ -19,7 +24,7 @@
 		        <tr th:each = "jabatan: ${listJabatan}">
 		            <td th:text="${jabatan.nama}"></td>
           		    <td th:text="${jabatan.deskripsi}"></td>
-         		    <td th:text="${jabatan.gajiPokok}"></td>    
+         		    <td th:text="${jabatan.gajiPokok}"></td>
 		        </tr>
 		    </tbody>
 		</table>

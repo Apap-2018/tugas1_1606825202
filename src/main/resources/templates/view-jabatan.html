@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<title>Detail Jabatan</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<style>
-		td{
-	    border: 1px solid #dddddd;
-	    text-align: left;
-	    padding: 8px;
-		}
-	</style>
-</head>
+	<head>
+		<title>Detail Jabatan</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		<style>
+			td{
+		    border: 1px solid #dddddd;
+		    text-align: left;
+		    padding: 8px;
+			}
+		</style>
+	</head>
 
-<body>
-	<div th:insert="~{header :: header}"></div>
-	<br>
-	<h3 th:text="'Detail Jabatan ' + ${jabatan.nama}"></h3>
-	<table>
-		<tr>
-			<td>Nama</td>
-			<td th:text="${jabatan.nama}"></td>
-		</tr>
-		<tr>
-			<td>Deskripsi</td>
-			<td th:text="${jabatan.deskripsi}"></td>
-		</tr>
-		<tr>
-			<td>Gaji Pokok</td>
-			<td th:text="'Rp ' + ${jabatan.gajiPokok}"></td>
-		</tr>
+	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<h3 th:text="'Detail Jabatan ' + ${jabatan.nama}"></h3>
+		<table>
+			<tr>
+				<td>Nama</td>
+				<td th:text="${jabatan.nama}"></td>
+			</tr>
+			<tr>
+				<td>Deskripsi</td>
+				<td th:text="${jabatan.deskripsi}"></td>
+			</tr>
+			<tr>
+				<td>Gaji Pokok</td>
+				<td th:text="'Rp ' + ${jabatan.gajiPokok}"></td>
+			</tr>
+			
+		</table>
+			
+		<div th:switch="${deleteStatus}"> 
+		  	<form th:case="'allowed'" th:action="@{/jabatan/hapus}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
+				<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
+				<button type="submit">Hapus</button>
+			</form>
+			
+			<button th:case="'forbidden'" type="submit" disabled>Hapus</button>
+		</div>
 		
-	</table>
-		
-	<div th:switch="${deleteStatus}"> 
-	  	<form th:case="'allowed'" th:action="@{/jabatan/hapus}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
+		<form th:action="@{/jabatan/ubah}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
 			<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
-			<button type="submit">Hapus</button>
+			<button type="submit">Ubah</button>
 		</form>
-		
-		<button th:case="'forbidden'" type="submit" disabled>Hapus</button>
-	</div>
-	
-	<form th:action="@{/jabatan/ubah}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
-		<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
-		<button type="submit">Ubah</button>
-	</form>
- 
-</body>
+	 
+	</body>
 
 </html>

@@ -2,8 +2,9 @@
 <html xmlns="http://www.thymeleaf.org">
 
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Sistem Infromasi Kepegawaian - SIPEG</title>
+
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	
 	<style>
 	.active-cyan-3 input[type=text] {
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-	<div th:insert="~{header :: header}"></div>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<br>
 	<h5>Lihat Data Pegawai Berdasarkan NIP</h5>
 	<form th:action="@{/pegawai}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
@@ -23,7 +24,34 @@
 		<br>
 	    <i class="fa fa-search" aria-hidden="true"></i>
 	    <input class="form-control form-control-sm ml-3 w-75" type="text" name="nip" placeholder="Search" aria-label="Search">
-		<button type="submit">Search</button>
+		<button type="submit">Lihat</button>
 	</form>
+	
+	<h5>Lihat Detail Jabatan</h5>
+	<form th:action="@{/jabatan/view}" method="GET">
+		<div class="form-control">
+		<label>Pilih Jabatan:</label>
+		<select class="form-control" name = "idJabatan">
+			<option th:each="jabatan: ${listJabatan}"
+	   				th:value="${jabatan.id}" 
+	   				th:text="${jabatan.nama}">
+ 			</option>
+		</select>
+		</div> 
+		<button type="submit">Lihat</button>
+	</form>
+	
+	<h5>Lihat Pegawai Termuda dan Tertua</h5>
+	<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+		<label>Pilih Intansi:</label>
+		<select class="form-control" name="idInstansi">
+			<option th:each="instansi: ${listInstansi}"
+					th:value="${instansi.id}"
+					th:text="${instansi.nama} + ' ' + ${instansi.provinsi.nama}">
+			</option>
+		</select>
+		<button type="submit">Lihat</button>
+	</form>
+	
 </body>
 </html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+
+		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+		<title>Cari Pegawai</title>
+	</head>
+	
+	<body>
+		<div th:insert="~{header :: header}"></div>
+	
+		<h3>Cari Pegawai</h3>
+		
+		<form th:action="@{/pegawai/cari}">
+			<div class="form-group">
+			 	<label>Provinsi:</label>
+			  	<select class="form-control" name="idProvinsi" id="provinsi">
+				  	<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>
+				    <option th:each="provinsi: ${listProvinsi}" 
+				    		th:value="${provinsi.id}" 
+				    		th:text="${provinsi.nama}"></option>
+			  	</select>
+			</div>
+			<div class="form-group">
+				<label>Instansi:</label>
+				<select class="form-control"
+						  name="idInstansi"
+						  id="instansi"
+						  th:value="${instansi}"
+						  required="required">
+					<option disabled="disabled" selected="selected" >-- Pilih Instansi --</option>		  
+				</select>
+			</div>	
+			<div class="form-group">
+				<label>Jabatan:</label>
+				<select class="form-control" name="idJabatan" id="jabatan">
+				  	<option disabled="disabled" selected="selected" >-- Pilih Jabatan --</option>
+				    <option th:each="jabatan: ${listJabatan}" 
+				    		th:value="${jabatan.id}" 
+				    		th:text="${jabatan.nama}"></option>
+			  	</select>
+			</div>
+			<button type="submit">Cari</button>	 
+					
+		</form>
+		
+		<hr>
+		
+		<table id="pegawai" class="display">
+		    <thead>
+		        <tr>
+		            <th>NIP</th>
+		            <th>Nama</th>
+	           	  	<th>Tempat Lahir</th>
+	           	  	<th>Tanggal Lahir</th>
+	           	  	<th>Tahun Masuk</th>
+	           	  	<th>Nama Instansi</th>
+	           	  	<th>Jabatan</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+		        </tr>
+		        
+		        <tr th:each = "pegawai: ${listPegawaiFix}">
+		            <td th:text="${pegawai.nip}"></td>
+		            <td th:text="${pegawai.nama}"></td>
+		            <td th:text="${pegawai.tempatLahir}"></td>
+		            <td th:text="${pegawai.tanggalLahir}"></td>
+		            <td th:text="${pegawai.tahunMasuk}"></td>
+		            <td th:text="${namaInstansi}"></td>
+		            <td th:text="${namaJabatan}"></td>
+		        </tr>
+		         
+		    </tbody>
+		</table>
+			
+		
+		<script>
+
+			$(document).ready( function () {
+			    $('#pegawai').DataTable();
+			} );
+			
+			$('#provinsi').change(
+				function() {
+		            $.getJSON("http://localhost:8080/provinsi/instansi", {
+		                provinsiId : $(this).val(),
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>';
+		                var len = data.length;
+		                for ( var i = 0; i < len; i++) {
+		                    html += 
+		                    	'<option value= "'+ data[i].id +'" + th:text="'+ data[i].nama +'">' + data[i].nama + '</option>';
+		                }
+		                $('#instansi').html(html);
+	      		});
+		   	});
+			
+			$('#instansi').change(
+				function(){
+					$.getJSON("http://localhost:8080/get/instansi", {
+		                instansiId : $(this).val(),
+		                ajax : 'true'
+		            },
+		            function(data) {
+		                this.value = data;
+	            });
+			});
+		</script>
+	</body>
+</html>

@@ -1,6 +1,7 @@
 package com.apap.tugas01.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -126,40 +127,62 @@ public class PegawaiController {
 	/**
 	 * Fitur 3: Mengubah Data Pegawai
 	 */
-	@RequestMapping("/pegawai/ubah")
-	private String updatePegawai(@RequestParam(value = "nip") String nip, Model model) {
-		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
-		model.addAttribute("pegawai", pegawai);
-		
-		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-		model.addAttribute("listProvinsi", listProvinsi);
-		
-		return "update-pegawai";
-	}
+//	@RequestMapping("/pegawai/ubah")
+//	private String updatePegawai(@RequestParam(value = "nip") String nip, Model model) {
+//		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
+//		model.addAttribute("pegawai", pegawai);
+//		
+//		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+//		model.addAttribute("listProvinsi", listProvinsi);
+//		
+//		return "update-pegawai";
+//	}
 	
 //	private String updatePegawaiSubmit() {
 //		
 //	}
 	
 	/**
-	 * Fitur 5: Menampilkan Data Pegawai Berdasarkan Instansi, Provinsi, dan/atau Jabatan Tertentu
+	 * Fitur 4: Menampilkan Data Pegawai Berdasarkan Instansi, Provinsi, dan/atau Jabatan Tertentu
 	 */
-//	@RequestMapping(value = "/pegawai/cari")
-//	private String viewPegawai(Model model) {
-//		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-//		model.addAttribute("listProvinsi", listProvinsi);
-//		
-//		return "search-pegawai";
-//	}
-//	
-//	@RequestMapping(value = "/pegawai/cari", method = RequestMethod.POST)
-//	private String viewPegawaiSubmit(@RequestParam(value = "idProvinsi") long idProvinsi,
-//							   		 @RequestParam(value = "idInstansi") long idInstansi,
-//							   		 @RequestParam(value = "idJabatan") long idJabatan) {
-//		
-//		
-//		return "search-pegawai";
-//	}
+	@RequestMapping(value = "/pegawai/cari")
+	private String viewPegawai(Model model) {
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		model.addAttribute("listProvinsi", listProvinsi);
+		
+		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
+		
+		InstansiModel instansi = new InstansiModel();
+		model.addAttribute("instansi", instansi);
+		
+		return "search-pegawai";
+	}
+	
+	@RequestMapping(value = "/pegawai/cari",  params = {"idProvinsi", "idInstansi", "idJabatan"})
+	private String viewPegawaiSubmit(@RequestParam(value = "idProvinsi") long idProvinsi,
+							   		 @RequestParam(value = "idInstansi") long idInstansi,
+							   		 @RequestParam(value = "idJabatan") long idJabatan,
+							   		 Model model) {
+
+		InstansiModel instansi = instansiService.getInstansi(idInstansi);
+		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
+		List<PegawaiModel> listPegawai = instansi.getPegawaiInstansi();
+		List<PegawaiModel> listPegawaiFix = new ArrayList<>();
+		for (PegawaiModel pegawai : listPegawai) {
+			for (JabatanModel j : pegawai.getJabatan()) {
+				if (j.equals(jabatan)) {
+					listPegawaiFix.add(pegawai);
+				}
+			}
+		}
+		
+		model.addAttribute("listPegawaiFix", listPegawaiFix);
+		model.addAttribute("namaInstansi", instansi.getNama());
+		model.addAttribute("namaJabatan", jabatan.getNama());
+		
+		return "search-pegawai";
+	}
 	
 	
 	/**

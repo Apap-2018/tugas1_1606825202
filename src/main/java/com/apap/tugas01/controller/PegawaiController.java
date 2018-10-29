@@ -136,6 +136,9 @@ public class PegawaiController {
 		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
 		model.addAttribute("listProvinsi", listProvinsi);
 		
+		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
+		
 		return "update-pegawai";
 	}
 	
@@ -166,6 +169,7 @@ public class PegawaiController {
 							   		 @RequestParam(value = "idJabatan") long idJabatan,
 							   		 Model model) {
 
+		ProvinsiModel provinsi = provinsiService.getProvinsiById(idProvinsi);
 		InstansiModel instansi = instansiService.getInstansi(idInstansi);
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
 		List<PegawaiModel> listPegawai = instansi.getPegawaiInstansi();
@@ -181,6 +185,18 @@ public class PegawaiController {
 		model.addAttribute("listPegawaiFix", listPegawaiFix);
 		model.addAttribute("namaInstansi", instansi.getNama());
 		model.addAttribute("namaJabatan", jabatan.getNama());
+		model.addAttribute("provinsiSelected", provinsi);
+		model.addAttribute("instansiSelected", instansi);
+		model.addAttribute("jabatanSelected", jabatan);
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		model.addAttribute("listProvinsi", listProvinsi);
+		
+		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
+		
+		InstansiModel instansi_ = new InstansiModel();
+		model.addAttribute("instansi", instansi_);
 		
 		return "search-pegawai";
 	}

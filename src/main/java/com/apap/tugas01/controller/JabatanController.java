@@ -32,6 +32,8 @@ public class JabatanController {
 		JabatanModel jabatan = new JabatanModel();
 		
 		model.addAttribute("jabatan", jabatan);
+		model.addAttribute("successMessage", "Data Jabatan berhasil ditambahkan!");
+
 		return "add-jabatan";
 	}
 	
@@ -63,8 +65,10 @@ public class JabatanController {
 	 * Fitur 8: Menghapus Jabatan
 	 */
 	@RequestMapping(value = "/jabatan/hapus")
-	public String deleteJabatan(@RequestParam(value = "idJabatan") long idJabatan) {
+	public String deleteJabatan(@RequestParam(value = "idJabatan") long idJabatan, Model model) {
 		jabatanService.delete(jabatanService.getJabatanById(idJabatan));
+		model.addAttribute("successMessage", "Data Jabatan berhasil dihapus!");
+
 		return "success";
 	}
 	
@@ -75,12 +79,15 @@ public class JabatanController {
 	public String updateJabatan(@RequestParam(value = "idJabatan") long idJabatan, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(idJabatan);
 		model.addAttribute("jabatan", jabatan);
+		model.addAttribute("successMessage", "Data Jabatan berhasil diubah!");
 		return "update-jabatan";
 	}
 	
 	@RequestMapping(value = "jabatan/ubah", method = RequestMethod.POST)
-	public String updateJabatanSubmit(@ModelAttribute JabatanModel jabatan){
+	public String updateJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model){
 		jabatanService.add(jabatan);
+		model.addAttribute("successMessage", "Data Jabatan berhasil diubah!");
+
 		return "success";
 	}
 	

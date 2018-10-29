@@ -87,7 +87,7 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
-	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai) {
+	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
 		//4 digit kode instansi
 		long kodeInstansi = pegawai.getInstansi().getId();
 		System.out.println();
@@ -121,6 +121,7 @@ public class PegawaiController {
 						   + "\n" + pegawai.getInstansi()
 						   + "\n" + pegawai.getJabatan());
 		
+		model.addAttribute("successMessage", "Data Pegawai berhasil ditambahkan!");
 		pegawaiService.add(pegawai);
 		return "success";
 	}
@@ -142,7 +143,9 @@ public class PegawaiController {
 		return "update-pegawai";
 	}
 	
-	private String updatePegawaiSubmit() {
+	private String updatePegawaiSubmit(Model model) {
+		model.addAttribute("successMessage", "Data Pegawai berhasil diubah!");
+		
 		return "success";
 	}
 	

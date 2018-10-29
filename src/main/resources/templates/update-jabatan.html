@@ -5,33 +5,64 @@
 		<title>Ubah Jabatan</title>
 		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	
+		
+		<style>
+			.button {
+			  background-color: #1eb6ed;
+			  border: none;
+			  color: white;
+			  padding: 10px 15px;
+			  text-align: center;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  opacity: 0.6;
+			  transition: 0.3s;
+			  display: inline-block;
+			  text-decoration: none;
+			  cursor: pointer;
+			  border-radius: 10px;
+			}
+			
+			.button:hover {opacity: 1}
+			
+			.form {
+			    border-radius: 20px;
+			    background-color: #f2f2f2;
+			    padding: 50px;
+			    width: 70%;
+		        margin: auto;
+			}
+			.button:hover {opacity: 1}
+		</style>
 	</head>
 
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
-		<h2>Ubah Jabatan</h2>
-		
-		<form th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="POST">
-			<div class="form-group">
-				<input type="hidden" name="id" th:value="${jabatan.id}"/>
-			</div>
-			<div class="form-group">
-				<label>Nama:</label>
-				<input class="form-control" type="text" name="nama" th:value="${jabatan.nama}"/>
-			</div>
+		<br>
+		<div class="form">
+			<h4 align="center">Ubah Jabatan</h4><br>
 			
-			<div class="form-group">
-				<label>Deskripsi:</label>
-				<input class="form-control" type="text" name="deskripsi" th:value="${jabatan.deskripsi}"/>
-			</div>
-			
-			<div class="form-group">
-				<label>Gaji Pokok:</label>
-				<input class="form-control" type="number" name="gajiPokok"  th:value="${jabatan.gajiPokok}"/>
-			</div>
-			
-			<button type="submit">Simpan</button>
-		</form>
+			<form th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="POST">
+				<div class="form-group">
+					<input type="hidden" name="id" th:value="${jabatan.id}"/>
+				</div>
+				<div class="form-group">
+					<label>Nama:</label>
+					<input class="form-control" type="text" name="nama" th:value="${jabatan.nama}"/>
+				</div>
+				
+				<div class="form-group">
+					<label>Deskripsi:</label>
+					<input class="form-control" type="text" name="deskripsi" th:value="${jabatan.deskripsi}"/>
+				</div>
+				
+				<div class="form-group">
+					<label>Gaji Pokok:</label>
+					<input class="form-control" type="number" name="gajiPokok"  th:value="${jabatan.gajiPokok}"/>
+				</div>
+				
+				<button class="button" type="submit">Simpan</button>
+			</form>
+		</div>
 	</body>
 </html>

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
-		<title>Insert title here</title>
+		<title>Success!</title>
 		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	</head>
 
 	<body>
-			<nav th:replace="fragments/fragment :: navbar"></nav>
-	
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<br>
+		<h4 th:text="${successMessage}"></h4>
 	</body>
 </html>

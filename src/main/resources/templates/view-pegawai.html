@@ -10,57 +10,84 @@
 		    text-align: left;
 		    padding: 8px;
 			}
+
+			.button {
+			  background-color: #1eb6ed;
+			  border: none;
+			  color: white;
+			  padding: 10px 15px;
+			  text-align: center;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  opacity: 0.6;
+			  transition: 0.3s;
+			  display: inline-block;
+			  text-decoration: none;
+			  cursor: pointer;
+			  border-radius: 10px;
+			}
+			
+			.button:hover {opacity: 1}
+				
+			.table {
+			    border-radius: 20px;
+			    background-color: #f2f2f2;
+			    padding: 50px;
+			    width: 45%;
+		        margin: auto;
+			}
 		</style>
 	</head>
 
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		<br>
-		<h3 th:text="'Lihat Data Pegawai ' + ${pegawai.nip}"></h3>
-		<table>
-			<tr>
-				<td>NIP</td>
-				<td th:text="${pegawai.nip}"></td>
-			</tr>
-			<tr>
-				<td>Nama</td>
-				<td th:text="${pegawai.nama}"></td>
-			</tr>
-			<tr>
-				<td>Tempat Lahir</td>
-				<td th:text="${pegawai.tempatLahir}"></td>
-			</tr>
-			<tr>
-				<td>Tanggal Lahir</td>
-				<td th:text="${pegawai.tanggalLahir}"></td>
-			</tr>
-			<tr>
-				<td>Tahun Masuk</td>
-				<td th:text="${pegawai.tahunMasuk}"></td>
-			</tr>
-			<tr>
-				<td>Nama Instansi</td>
-				<td th:text="${pegawai.instansi.nama}"></td>
-			</tr>
-			<tr>
-				<td>Jabatan</td>	
-				<td>
-				<th:block th:each="jabatan : ${jabatanPegawai}">
-					<p th:text="${jabatan.nama}"></p>		
-				</td>
-			</tr>
-			<tr>
-				<td>Gaji</td>
-				<td th:text="'Rp ' + ${gaji}"></td>
-			</tr>
+		<div class="table">
+			<h4 align="center" th:text="'Lihat Data Pegawai ' + ${pegawai.nip}"></h4><br>
+			<table align="center">
+				<tr>
+					<td>NIP</td>
+					<td th:text="${pegawai.nip}"></td>
+				</tr>
+				<tr>
+					<td>Nama</td>
+					<td th:text="${pegawai.nama}"></td>
+				</tr>
+				<tr>
+					<td>Tempat Lahir</td>
+					<td th:text="${pegawai.tempatLahir}"></td>
+				</tr>
+				<tr>
+					<td>Tanggal Lahir</td>
+					<td th:text="${pegawai.tanggalLahir}"></td>
+				</tr>
+				<tr>
+					<td>Tahun Masuk</td>
+					<td th:text="${pegawai.tahunMasuk}"></td>
+				</tr>
+				<tr>
+					<td>Nama Instansi</td>
+					<td th:text="${pegawai.instansi.nama}"></td>
+				</tr>
+				<tr>
+					<td>Jabatan</td>	
+					<td>
+					<th:block th:each="jabatan : ${jabatanPegawai}">
+						<p th:text="${jabatan.nama}"></p>		
+					</td>
+				</tr>
+				<tr>
+					<td>Gaji</td>
+					<td th:text="'Rp ' + ${gaji}"></td>
+				</tr>
+			</table>
+			<br>
+			<form th:action="@{/pegawai/ubah}" method="GET">
+				<input type="hidden" name="nip" th:value="${pegawai.nip}" />		
+				<button class="button" type="submit">Ubah</button>
+			</form>
+		</div>
 			
-		</table>
-			
-		<form th:action="@{/pegawai/ubah}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
-			<input type="hidden" name="nip" th:value="${pegawai.nip}" />		
-			<button type="submit">Ubah</button>
-		</form>
-		
 	</body>
 
 </html>

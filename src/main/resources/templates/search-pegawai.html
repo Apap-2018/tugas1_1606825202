@@ -4,52 +4,79 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	
-
 		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
 		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
 		<title>Cari Pegawai</title>
+				
+		<style>
+			.button {
+			  background-color: #1eb6ed;
+			  border: none;
+			  color: white;
+			  padding: 10px 15px;
+			  text-align: center;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  opacity: 0.6;
+			  transition: 0.3s;
+			  display: inline-block;
+			  text-decoration: none;
+			  cursor: pointer;
+			  border-radius: 10px;
+			}
+			
+			.button:hover {opacity: 1}
+			
+			.form {
+			    border-radius: 20px;
+			    background-color: #f2f2f2;
+			    padding: 50px;
+			    width: 70%;
+		        margin: auto;
+			}
+			.button:hover {opacity: 1}
+		</style>		
 	</head>
 	
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
-	
-		<h3>Cari Pegawai</h3>
-		
-		<form th:action="@{/pegawai/cari}">
-			<div class="form-group">
-			 	<label>Provinsi:</label>
-			  	<select class="form-control" name="idProvinsi" id="provinsi">
-				  	<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>
-				    <option th:each="provinsi: ${listProvinsi}" 
-				    		th:value="${provinsi.id}" 
-				    		th:text="${provinsi.nama}"></option>
-			  	</select>
-			</div>
-			<div class="form-group">
-				<label>Instansi:</label>
-				<select class="form-control"
-						  name="idInstansi"
-						  id="instansi"
-						  th:value="${instansi}"
-						  required="required">
-					<option disabled="disabled" selected="selected" >-- Pilih Instansi --</option>		  
-				</select>
-			</div>	
-			<div class="form-group">
-				<label>Jabatan:</label>
-				<select class="form-control" name="idJabatan" id="jabatan">
-				  	<option disabled="disabled" selected="selected" >-- Pilih Jabatan --</option>
-				    <option th:each="jabatan: ${listJabatan}" 
-				    		th:value="${jabatan.id}" 
-				    		th:text="${jabatan.nama}"></option>
-			  	</select>
-			</div>
-			<button type="submit">Cari</button>	 
-					
-		</form>
-		
+		<br>
+		<div class="form">
+			<h4 align="center">Cari Pegawai</h4><br>
+			<form th:action="@{/pegawai/cari}">
+				<div class="form-group">
+				 	<label>Provinsi:</label>
+				  	<select class="form-control" name="idProvinsi" id="provinsi">
+					  	<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>
+					    <option th:each="provinsi: ${listProvinsi}" 
+					    		th:value="${provinsi.id}" 
+					    		th:text="${provinsi.nama}"></option>
+				  	</select>
+				</div>
+				<div class="form-group">
+					<label>Instansi:</label>
+					<select class="form-control"
+							  name="idInstansi"
+							  id="instansi"
+							  th:value="${instansi}"
+							  required="required">
+						<option disabled="disabled" selected="selected" >-- Pilih Instansi --</option>		  
+					</select>
+				</div>	
+				<div class="form-group">
+					<label>Jabatan:</label>
+					<select class="form-control" name="idJabatan" id="jabatan">
+					  	<option disabled="disabled" selected="selected" >-- Pilih Jabatan --</option>
+					    <option th:each="jabatan: ${listJabatan}" 
+					    		th:value="${jabatan.id}" 
+					    		th:text="${jabatan.nama}"></option>
+				  	</select>
+				</div>
+				<button class="button" type="submit">Cari</button>	 
+			</form>
+		</div>
 		<hr>
 		
 		<table id="pegawai" class="display">

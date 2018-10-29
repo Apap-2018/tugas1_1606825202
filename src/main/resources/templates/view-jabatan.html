@@ -10,42 +10,69 @@
 		    text-align: left;
 		    padding: 8px;
 			}
+			
+			.button {
+			  background-color: #1eb6ed;
+			  border: none;
+			  color: white;
+			  padding: 10px 15px;
+			  text-align: center;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  opacity: 0.6;
+			  transition: 0.3s;
+			  display: inline-block;
+			  text-decoration: none;
+			  cursor: pointer;
+			  border-radius: 10px;
+			}
+			
+			.button:hover {opacity: 1}
+				
+			.table {
+			    border-radius: 20px;
+			    background-color: #f2f2f2;
+			    padding: 50px;
+			    width: 50%;
+		        margin: auto;
+			}
 		</style>
 	</head>
 
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
-		<h3 th:text="'Detail Jabatan ' + ${jabatan.nama}"></h3>
-		<table>
-			<tr>
-				<td>Nama</td>
-				<td th:text="${jabatan.nama}"></td>
-			</tr>
-			<tr>
-				<td>Deskripsi</td>
-				<td th:text="${jabatan.deskripsi}"></td>
-			</tr>
-			<tr>
-				<td>Gaji Pokok</td>
-				<td th:text="'Rp ' + ${jabatan.gajiPokok}"></td>
-			</tr>
-			
-		</table>
-			
-		<div th:switch="${deleteStatus}"> 
-		  	<form th:case="'allowed'" th:action="@{/jabatan/hapus}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
+		<br>
+		<div class="table">
+		<h4 align="center">Detail Jabatan</h4><br>
+		<h4 align="center" th:text="${jabatan.nama}"></h4><br>
+			<table align="center">
+				<tr>
+					<td>Nama</td>
+					<td th:text="${jabatan.nama}"></td>
+				</tr>
+				<tr>
+					<td>Deskripsi</td>
+					<td th:text="${jabatan.deskripsi}"></td>
+				</tr>
+				<tr>
+					<td>Gaji Pokok</td>
+					<td th:text="'Rp ' + ${jabatan.gajiPokok}"></td>
+				</tr>
+			</table>
+				
+			<div th:switch="${deleteStatus}"> 
+			  	<form th:case="'allowed'" th:action="@{/jabatan/hapus}" method="GET">
+					<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
+					<button type="submit">Hapus</button>
+				</form>
+				<button class="button" th:case="'forbidden'" type="submit" disabled>Hapus</button>
+			</div>
+			<br>
+			<form th:action="@{/jabatan/ubah}" method="GET">
 				<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
-				<button type="submit">Hapus</button>
+				<button class="button" type="submit">Ubah</button>
 			</form>
-			
-			<button th:case="'forbidden'" type="submit" disabled>Hapus</button>
-		</div>
-		
-		<form th:action="@{/jabatan/ubah}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
-			<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />		
-			<button type="submit">Ubah</button>
-		</form>
-	 
+	 </div>
 	</body>
 
 </html>

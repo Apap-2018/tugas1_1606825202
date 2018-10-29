@@ -1,6 +1,7 @@
 package com.apap.tugas01.controller;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -127,20 +128,20 @@ public class PegawaiController {
 	/**
 	 * Fitur 3: Mengubah Data Pegawai
 	 */
-//	@RequestMapping("/pegawai/ubah")
-//	private String updatePegawai(@RequestParam(value = "nip") String nip, Model model) {
-//		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
-//		model.addAttribute("pegawai", pegawai);
-//		
-//		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-//		model.addAttribute("listProvinsi", listProvinsi);
-//		
-//		return "update-pegawai";
-//	}
+	@RequestMapping("/pegawai/ubah")
+	private String updatePegawai(@RequestParam(value = "nip") String nip, Model model) {
+		PegawaiModel pegawai = pegawaiService.getPegawaiByNIP(nip);
+		model.addAttribute("pegawai", pegawai);
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
+		model.addAttribute("listProvinsi", listProvinsi);
+		
+		return "update-pegawai";
+	}
 	
-//	private String updatePegawaiSubmit() {
-//		
-//	}
+	private String updatePegawaiSubmit() {
+		return "success";
+	}
 	
 	/**
 	 * Fitur 4: Menampilkan Data Pegawai Berdasarkan Instansi, Provinsi, dan/atau Jabatan Tertentu

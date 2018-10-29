@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org">
-
-<head>
-	<title>Sistem Infromasi Kepegawaian - SIPEG</title>
-
-	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<head>
+		<title>Sistem Infromasi Kepegawaian - SIPEG</title>
 	
-	<style>
-	.active-cyan-3 input[type=text] {
-    border: 1px solid #4dd0e1;
-    box-shadow: 0 0 0 1px #4dd0e1;
-	}	
-	</style>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		
+		<style>
+			.button {
+			  background-color: #1eb6ed;
+			  border: none;
+			  color: white;
+			  padding: 10px 15px;
+			  text-align: center;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  opacity: 0.6;
+			  transition: 0.3s;
+			  display: inline-block;
+			  text-decoration: none;
+			  cursor: pointer;
+			  border-radius: 10px;
+			}
+			
+			.button:hover {opacity: 1}
+			
+			.form {
+			    border-radius: 20px;
+			    background-color: #f2f2f2;
+			    padding: 50px;
+			    width: 50%;
+		        margin: auto;
+			}
+		</style>	
+	</head>
 	
-</head>
-
-<body>
-	<nav th:replace="fragments/fragment :: navbar"></nav>
-	<br>
-	<h5>Lihat Data Pegawai Berdasarkan NIP</h5>
-	<form th:action="@{/pegawai}" method="GET" class="form-inline active-cyan-3 active-cyan-4">
-		Masukan Nomor Induk Pegawai:
+	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
 		<br>
-	    <i class="fa fa-search" aria-hidden="true"></i>
-	    <input class="form-control form-control-sm ml-3 w-75" type="text" name="nip" placeholder="Search" aria-label="Search">
-		<button type="submit">Lihat</button>
-	</form>
-	
-	<h5>Lihat Detail Jabatan</h5>
-	<form th:action="@{/jabatan/view}" method="GET">
-		<div class="form-control">
-		<label>Pilih Jabatan:</label>
-		<select class="form-control" name = "idJabatan">
-			<option th:each="jabatan: ${listJabatan}"
-	   				th:value="${jabatan.id}" 
-	   				th:text="${jabatan.nama}">
- 			</option>
-		</select>
-		</div> 
-		<button type="submit">Lihat</button>
-	</form>
-	
-	<h5>Lihat Pegawai Termuda dan Tertua</h5>
-	<form th:action="@{/pegawai/termuda-tertua}" method="GET">
-		<label>Pilih Intansi:</label>
-		<select class="form-control" name="idInstansi">
-			<option th:each="instansi: ${listInstansi}"
-					th:value="${instansi.id}"
-					th:text="${instansi.nama} + ' ' + ${instansi.provinsi.nama}">
-			</option>
-		</select>
-		<button type="submit">Lihat</button>
-	</form>
-	
-</body>
+		<div class="form">
+			<h5>Lihat Data Pegawai Berdasarkan NIP</h5>
+			<form th:action="@{/pegawai}" method="GET">
+				<div class="form-group">
+				  <label>Masukan Nomor Induk Pegawai:</label>
+				  <input class="form-control" type="text" name="nip" />
+				</div>
+				<button class="button" type="submit">Lihat</button>
+			</form>
+		</div>
+		<br><br>
+		<div class="form">
+			<h5>Lihat Detail Jabatan</h5>
+			<form th:action="@{/jabatan/view}" method="GET">
+				<div class="form-group">
+				<label>Pilih Jabatan:</label>
+				<select class="form-control" name = "idJabatan">
+					<option th:each="jabatan: ${listJabatan}"
+			   				th:value="${jabatan.id}" 
+			   				th:text="${jabatan.nama}">
+		 			</option>
+				</select>
+				</div>
+				<button class="button" type="submit">Lihat</button>
+			</form>
+		</div>
+		<br><br>
+		<div class="form">
+			<h5>Lihat Pegawai Termuda dan Tertua</h5>
+			<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+				<div class="form-group">
+				<label>Pilih Intansi:</label>
+				<select class="form-control" name="idInstansi">
+					<option th:each="instansi: ${listInstansi}"
+							th:value="${instansi.id}"
+							th:text="${instansi.nama} + ' ' + ${instansi.provinsi.nama}">
+					</option>
+				</select>
+				</div>
+				<button class="button" type="submit">Lihat</button>
+			</form>
+		</div>
+	</body>
 </html>
